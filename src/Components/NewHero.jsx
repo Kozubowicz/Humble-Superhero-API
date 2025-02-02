@@ -8,24 +8,28 @@ export function NewHero() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log(event.target.name.value);
 
-    const name = event.target.name.value;
-    const superPower = event.target.superPower.value;
-    const humilityScore = event.target.humilityScore.value;
+    try {
+      const name = event.target.name.value;
+      const superPower = event.target.superPower.value;
+      const humilityScore = event.target.humilityScore.value;
 
-    const response = await addNewHero(name, superPower, humilityScore);
+      const response = await addNewHero(name, superPower, humilityScore);
 
-    console.log(response);
+      console.log(response);
 
-    if (response) {
-      //clean data in Form
-      event.target.name.value = '';
-      event.target.superPower.value = '';
-      event.target.humilityScore.value = '';
+      if (response) {
+        //clean data in Form
+        event.target.name.value = '';
+        event.target.superPower.value = '';
+        event.target.humilityScore.value = '';
 
-      setError(false);
-    } else {
+        setError(false);
+      } else {
+        setError(true);
+      }
+    } catch (error) {
+      console.error('Error adding hero:', error);
       setError(true);
     }
   };
