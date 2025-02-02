@@ -29,20 +29,25 @@ const heroes = [
 const app = express();
 const port = 3000;
 
-app.use(cors()); //allows on communication between front-end and api
+app.use(cors()); //allows on communication between front-end and api in local network
 app.use(express.json());
 
-app.get('/superheroes', (req, res) => {
-  const tmp = [...heroes].sort(
-    (el1, el2) => el2.humilityScore - el1.humilityScore
-  );
-  res.json(tmp);
+app.get('/superheroes', async (req, res) => {
+  try {
+    const data = [...heroes].sort(
+      (el, el2) => el2.humilityScore - el.humilityScore
+    );
+    res.status(200).json(data);
+  } catch (error) {
+    console.error('Error fetching superheroes:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 app.post('/superheroes', (req, res) => {
-	//durring adding new object to database there should be also included id property,
-	// which might by manualy created by adding timestamp as id, or automatily by database system like MongoDB
-	// there should be also collection schema wchich define what properiets should by in object and default values for them
+  //durring adding new object to database there should be also included id property,
+  // which might by manualy created by adding timestamp as id, or automatily by database system like MongoDB
+  // there should be also collection schema wchich define what properiets should by in object and default values for them
   const { name, superPower, humilityScore } = req.body;
 
   if (!name || !superPower || !humilityScore) {

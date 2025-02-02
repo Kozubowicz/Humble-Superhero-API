@@ -28,8 +28,6 @@ export function NewHero() {
     } else {
       setError(true);
     }
-
-    return null;
   };
 
   return (

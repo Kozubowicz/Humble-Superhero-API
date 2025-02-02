@@ -15,8 +15,8 @@ export function ListOfHeroes() {
           </thead>
           <tbody>
             {heroesList &&
-              heroesList.map(({ name, superPower, humilityScore }) => (
-                <tr className='listOfHeroes-Table--Row' key={name}>
+              heroesList.map(({ _id, name, superPower, humilityScore }) => (
+                <tr className='listOfHeroes-Table--Row' key={_id}>
                   <td className='listOfHeroes-Table--Cell'>{name}</td>
                   <td className='listOfHeroes-Table--Cell'>{superPower}</td>
                   <td className='listOfHeroes-Table--Cell'>{humilityScore}</td>
